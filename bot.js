@@ -16,26 +16,21 @@ client.on("messageCreate", (message) => {
 
   if (message.author.bot) return;
 
-  // comando de teste
+  // teste do bot
   if (message.content === "!ping") {
-    message.reply("Pong!");
+    return message.reply("Pong!");
   }
 
-  // comando da lobby GC
-  if (message.content.startsWith("!gc")) {
+  // detectar link da Gamers Club automaticamente
+  if (message.content.includes("gamersclub.com")) {
 
-    const args = message.content.split(" ");
-    const link = args[1];
-
-    if (!link) {
-      return message.reply("Envie o link da lobby.\nExemplo: `!gc https://gamersclub.com/...`");
-    }
+    const link = message.content;
 
     const embed = new EmbedBuilder()
       .setTitle("🎮 Lobby Gamers Club")
       .setDescription("Clique no link abaixo para acessar a partida")
       .addFields(
-        { name: "🔗 Link da partida", value: link },
+        { name: "🔗 Entrar na lobby", value: `[Clique aqui](${link})` },
         { name: "🕹 Jogo", value: "Counter-Strike 2", inline: true },
         { name: "📌 Tipo", value: "Lobby Fechada", inline: true }
       )
