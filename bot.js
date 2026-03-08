@@ -8,8 +8,8 @@ const client = new Client({
   ]
 });
 
-client.once("clientReady", () => {
-  console.log("Bot GC online!");
+client.once("ready", () => {
+  console.log(`Bot GC online como ${client.user.tag}`);
 });
 
 client.on("messageCreate", (message) => {
