@@ -12,23 +12,26 @@ client.once("ready", () => {
   console.log(`Bot GC online como ${client.user.tag}`);
 });
 
-client.on("messageCreate", (message) => {
+client.on("messageCreate", async (message) => {
 
   if (message.author.bot) return;
 
-  // teste do bot
+  // teste
   if (message.content === "!ping") {
     return message.reply("Pong!");
   }
 
-  // detectar link da Gamers Club automaticamente
+  // detectar link GC
   if (message.content.includes("gamersclub.com")) {
 
     const link = message.content;
 
+    // apagar mensagem original
+    await message.delete().catch(() => {});
+
     const embed = new EmbedBuilder()
       .setTitle("🎮 Lobby Gamers Club")
-      .setDescription("Clique no link abaixo para acessar a partida")
+      .setDescription("Clique abaixo para entrar na partida")
       .addFields(
         { name: "🔗 Entrar na lobby", value: `[Clique aqui](${link})` },
         { name: "🕹 Jogo", value: "Counter-Strike 2", inline: true },
